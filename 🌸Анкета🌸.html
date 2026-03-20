@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Анкета здоровья и питания | Herbalife</title>
+    <style>
+        /* Все стили без изменений (такие же, как в предыдущей версии) */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+        }
+        body {
+            background: linear-gradient(145deg, #f0f7e8 0%, #e1f0d4 100%);
+            min-height: 100vh;
+            padding: 20px 15px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+        .card {
+            max-width: 700px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            border-radius: 36px;
+            box-shadow: 0 25px 45px -12px rgba(40, 80, 30, 0.35);
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            padding: 28px 24px;
+            transition: all 0.2s;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .logo span {
+            font-size: 26px;
+            font-weight: 600;
+            color: #2b5e2b;
+            letter-spacing: -0.5px;
+            background: #e1f0d4;
+            padding: 6px 18px;
+            border-radius: 60px;
+        }
+        h2 {
+            font-size: 1.9rem;
+            font-weight: 600;
+            color: #1d3b1d;
+            margin-bottom: 6px;
+            line-height: 1.2;
+        }
+        .subhead {
+            color: #3f5e3f;
+            font-size: 1rem;
+            margin-bottom: 25px;
+            border-left: 4px solid #8fc27e;
+            padding-left: 16px;
+            background: #f4faf0;
+            border-radius: 0 20px 20px 0;
+            line-height: 1.5;
+        }
+        .field {
+            margin-bottom: 24px;
+        }
+        label {
+            font-weight: 600;
+            font-size: 1rem;
+            color: #1e3a1e;
+            display: block;
+            margin-bottom: 8px;
+        }
+        label .hint {
+            font-weight: 400;
+            color: #6a7e6a;
+            font-size: 0.9rem;
+            margin-left: 8px;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 16px 18px;
+            background: #f9fff9;
+            border: 2px solid #c8ddc1;
+            border-radius: 28px;
+            font-size: 1rem;
+            outline: none;
+            transition: 0.2s;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+        }
+        input:focus, select:focus, textarea:focus {
+            border-color: #6fa85a;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(111, 168, 90, 0.15);
+        }
+        .row-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        .checkbox-group, .radio-group {
+            background: #f4faf0;
+            padding: 18px 16px;
+            border-radius: 28px;
+            border: 2px solid #d4e8cb;
+        }
+        .checkbox-item, .radio-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        .checkbox-item:last-child, .radio-item:last-child {
+            margin-bottom: 0;
+        }
+        .checkbox-item input, .radio-item input {
+            width: 22px;
+            height: 22px;
+            margin-right: 14px;
+            accent-color: #2e7d32;
+            box-shadow: none;
+            flex-shrink: 0;
+        }
+        .checkbox-item label, .radio-item label {
+            margin-bottom: 0;
+            font-weight: 500;
+            color: #1f3a1f;
+            font-size: 1rem;
+        }
+        hr {
+            border: none;
+            border-top: 2px dashed #bcd0b2;
+            margin: 28px 0 20px;
+        }
+        .btn-wa {
+            background: #25D366;
+            border: none;
+            color: white;
+            font-size: 1.4rem;
+            font-weight: 700;
+            padding: 20px 24px;
+            border-radius: 60px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+            cursor: pointer;
+            transition: 0.2s;
+            border: 2px solid rgba(255,255,255,0.3);
+            margin-top: 15px;
+        }
+        .btn-wa:hover {
+            background: #20b859;
+            transform: scale(1.02);
+            box-shadow: 0 15px 30px rgba(37, 211, 102, 0.5);
+        }
+        .btn-wa:active {
+            transform: scale(0.98);
+        }
+        .contact-info {
+            text-align: center;
+            margin-top: 25px;
+            padding-top: 15px;
+            border-top: 1px solid #d4e8cb;
+            font-size: 0.85rem;
+            line-height: 1.4;
+            color: #6a7e6a;
+        }
+        .contact-info .name {
+            font-weight: 600;
+            font-size: 1rem;
+            color: #4a6b4a;
+        }
+        .contact-info .social {
+            color: #5f7e5f;
+        }
+        .contact-info .discount {
+            background: #f0f7ea;
+            display: inline-block;
+            padding: 4px 14px;
+            border-radius: 30px;
+            font-weight: 400;
+            margin-top: 8px;
+            font-size: 0.8rem;
+            color: #3f5e3f;
+        }
+    </style>
+</head>
+<body>
+<div class="card">
+    <div class="logo">
+        <span>🌿 Herbalife</span>
+    </div>
+    <h2>Анкета здоровья и питания</h2>
+    <div class="subhead">Для тех, кто хочет лучше питаться, чувствовать лёгкость и энергию</div>
+
+    <form id="surveyForm">
+        <!-- ЛИЧНАЯ ИНФОРМАЦИЯ -->
+        <div class="row-2col">
+            <div class="field">
+                <label>Имя <span class="hint">обязательно</span></label>
+                <input type="text" id="name" placeholder="Например, Анна" required>
+            </div>
+            <div class="field">
+                <label>Возраст</label>
+                <input type="number" id="age" placeholder="35">
+            </div>
+        </div>
+
+        <div class="row-2col">
+            <div class="field">
+                <label>Рост (см)</label>
+                <input type="number" id="height" placeholder="165">
+            </div>
+            <div class="field">
+                <label>Вес (кг)</label>
+                <input type="number" id="weight" placeholder="72">
+            </div>
+        </div>
+
+        <!-- РАБОТА И ОБРАЗ ЖИЗНИ -->
+        <div class="field">
+            <label>Где вы работаете / чем занимаетесь?</label>
+            <input type="text" id="job" placeholder="Офис, производство, удалёнка, декрет, учёба...">
+        </div>
+
+        <div class="field">
+            <label>Тип нагрузки на работе / в течение дня</label>
+            <div class="radio-group">
+                <div class="radio-item"><input type="radio" name="activity" value="Сидячая работа (офис, за компьютером)" id="act1"><label for="act1">🪑 Сидячая работа (офис, за компьютером)</label></div>
+                <div class="radio-item"><input type="radio" name="activity" value="На ногах (продавец, курьер, парикмахер)" id="act2"><label for="act2">🚶 На ногах (продавец, курьер, парикмахер)</label></div>
+                <div class="radio-item"><input type="radio" name="activity" value="Смешанная (сижу/хожу)" id="act3"><label for="act3">🚶‍♂️ Смешанная (сижу/хожу)</label></div>
+                <div class="radio-item"><input type="radio" name="activity" value="Физический труд" id="act4"><label for="act4">💪 Физический труд</label></div>
+                <div class="radio-item"><input type="radio" name="activity" value="Другое / не работаю" id="act5"><label for="act5">🧘 Другое / не работаю</label></div>
+            </div>
+        </div>
+
+        <!-- ГРАФИК РАБОТЫ -->
+        <div class="field">
+            <label>График работы</label>
+            <select id="schedule">
+                <option value="Дневной">Дневной</option>
+                <option value="Сменный (день/ночь)">Сменный (день/ночь)</option>
+                <option value="Ночные смены">Ночные смены</option>
+                <option value="Свободный график">Свободный график</option>
+                <option value="Другое">Другое</option>
+            </select>
+        </div>
+
+        <!-- ЦЕЛИ -->
+        <div class="field">
+            <label>🎯 Чего вы хотите достичь? (можно несколько)</label>
+            <div class="checkbox-group" id="goalsGroup">
+                <div class="checkbox-item"><input type="checkbox" value="Снижение веса (похудеть)" id="goal1"><label for="goal1">Снижение веса (похудеть)</label></div>
+                <div class="checkbox-item"><input type="checkbox" value="Поддержание веса" id="goal2"><label for="goal2">Поддержание веса</label></div>
+                <div class="checkbox-item"><input type="checkbox" value="Набор веса/мышц" id="goal3"><label for="goal3">Набор веса/мышц</label></div>
+                <div class="checkbox-item"><input type="checkbox" value="Больше энергии/бодрости" id="goal4"><label for="goal4">Больше энергии/бодрости</label></div>
+                <div class="checkbox-item"><input type="checkbox" value="Очищение, лёгкость (детокс)" id="goal5"><label for="goal5">Очищение, лёгкость (Алоэ, Чай)</label></div>
+                <div class="checkbox-item"><input type="checkbox" value="Улучшить здоровье/иммунитет" id="goal6"><label for="goal6">Улучшить здоровье/иммунитет</label></div>
+                <div class="checkbox-item"><input type="checkbox" value="Заменить вредные перекусы" id="goal7"><label for="goal7">Заменить вредные перекусы</label></div>
+            </div>
+        </div>
+
+        <!-- ПРОБЛЕМЫ -->
+        <div class="field">
+            <label>⚠️ Что мешает питаться правильно? (можно несколько)</label>
+            <div class="checkbox-group" id="problemsGroup">
+                <div class="checkbox-item"><input type="checkbox" value="Ночной жор (просыпаюсь поесть)" id="prob1"><label for="prob1">Ночной «жор» (просыпаюсь поесть)</label></div>
+                <div class="checkbox-item"><input type="checkbox" value="Вечерний жор (после 18:00)" id="prob2"><label for="prob2">Вечерний жор (после 18:00)</label></div>
+                <div class="checkbox-item"><input type="checkbox" value="Перекусы на работе/учебе" id="prob3"><label for="prob3">Перекусы на работе (печенье, булки, снеки)</label></div>
+                <div class="checkbox-item"><input type="checkbox" value="Нет времени готовить" id="prob4"><label for="prob4">Нет времени готовить</label></div>
+            </div>
+        </div>
+
+        <!-- ТЯГА -->
+        <div class="field">
+            <label>🍰 Есть ли особая тяга к продуктам?</label>
+            <div class="checkbox-group" id="cravingsGroup">
+                <div class="checkbox-item"><input type="checkbox" value="Сладкое (конфеты, шоколад)" id="crav1"><label for="crav1">Сладкое (конфеты, шоколад, пирожные)</label></div>
+                <div class="checkbox-item"><input type="checkbox" value="Мучное (хлеб, булки, макароны)" id="crav2"><label for="crav2">Мучное (хлеб, булки, макароны)</label></div>
+                <div class="checkbox-item"><input type="checkbox" value="Соленое/жирное (чипсы, фастфуд)" id="crav3"><label for="crav3">Соленое/жирное (чипсы, фастфуд)</label></div>
+            </div>
+        </div>
+
+        <!-- ВОДА -->
+        <div class="field">
+            <label>💧 Сколько чистой воды вы пьёте в день? (не считая чай, кофе, соки)</label>
+            <div class="radio-group">
+                <div class="radio-item"><input type="radio" name="water" value="Менее 1 литра" id="w1"><label for="w1">Менее 1 литра</label></div>
+                <div class="radio-item"><input type="radio" name="water" value="1–1,5 литра" id="w2"><label for="w2">От 1 до 1,5 литров</label></div>
+                <div class="radio-item"><input type="radio" name="water" value="1,5–2 литра" id="w3"><label for="w3">От 1,5 до 2 литров</label></div>
+                <div class="radio-item"><input type="radio" name="water" value="Более 2 литров" id="w4"><label for="w4">Более 2 литров</label></div>
+            </div>
+        </div>
+
+        <!-- ЗДОРОВЬЕ -->
+        <div class="field">
+            <label>🤧 Аллергии или особенности здоровья</label>
+            <input type="text" id="allergies" placeholder="Например: аллергия на пыльцу, лактозу, ничего">
+        </div>
+
+        <div class="field">
+            <label>🚬🍷 Вредные привычки (курение, алкоголь и т.п.)</label>
+            <input type="text" id="badHabits" placeholder="Курю, алкоголь редко, не употребляю...">
+        </div>
+
+        <div class="field">
+            <label>🚽 Проблемы с ЖКТ (запоры, вздутие, изжога и т.д.)</label>
+            <input type="text" id="digestion" placeholder="Например: бывают запоры, нет проблем">
+        </div>
+
+        <div class="field">
+            <label>✨ Что конкретно хотите улучшить? (сон, настроение, кожа и т.п.)</label>
+            <input type="text" id="improvements" placeholder="Например: качество сна, состояние кожи">
+        </div>
+
+        <!-- ПРОДУКТЫ HERBALIFE -->
+        <div class="field">
+            <label>🧪 Пробовали ли вы продукты Herbalife? (если да, то какие)</label>
+            <input type="text" id="triedProducts" placeholder="Например, коктейль, алоэ, чай. Если нет — оставьте пустым">
+        </div>
+        <div class="field">
+            <label>❤️ Если пробовали, что понравилось больше всего?</label>
+            <input type="text" id="likedProducts" placeholder="Вкус, энергия, удобство...">
+        </div>
+
+        <!-- ДЛЯ ТЕХ, КТО УЖЕ ПОЛЬЗУЕТСЯ -->
+        <div class="field">
+            <label>📅 Если вы уже пользуетесь Herbalife — как давно?</label>
+            <select id="experience">
+                <option value="не пользуется">Не пользуется / Не выбрано</option>
+                <option value="Менее 1 месяца">Менее 1 месяца</option>
+                <option value="1–3 месяца">1–3 месяца</option>
+                <option value="3–6 месяцев">3–6 месяцев</option>
+                <option value="6–12 месяцев">6–12 месяцев</option>
+                <option value="Более года">Более года</option>
+                <option value="Более 3 лет">Более 3 лет</option>
+                <option value="Более 5 лет">Более 5 лет</option>
+                <option value="Более 10 лет">Более 10 лет</option>
+            </select>
+        </div>
+
+        <div class="field">
+            <label>💰 Какая у вас сейчас скидка?</label>
+            <select id="discount">
+                <option value="не знаю">Не знаю / Нет скидки</option>
+                <option value="15%">15%</option>
+                <option value="25%">25%</option>
+                <option value="35%">35%</option>
+                <option value="42%">42%</option>
+                <option value="50%">50%</option>
+            </select>
+        </div>
+
+        <div class="field">
+            <label>💵 Хотели бы вы получать дополнительный доход с Herbalife?</label>
+            <div class="radio-group">
+                <div class="radio-item"><input type="radio" name="income" value="Да, интересно" id="inc1"><label for="inc1">Да, интересно</label></div>
+                <div class="radio-item"><input type="radio" name="income" value="Возможно, но нужно больше информации" id="inc2"><label for="inc2">Возможно, но нужно больше информации</label></div>
+                <div class="radio-item"><input type="radio" name="income" value="Нет, не интересуюсь" id="inc3"><label for="inc3">Нет, не интересуюсь</label></div>
+            </div>
+        </div>
+
+        <!-- НОВЫЙ БЛОК: МАРАФОН СТРОЙНОСТИ -->
+        <div class="field">
+            <label>🎽 Хотите участвовать в марафоне стройности от Татьяны?</label>
+            <div class="radio-group">
+                <div class="radio-item"><input type="radio" name="marathon" value="Да, хочу участвовать" id="mar1"><label for="mar1">✅ Да, хочу участвовать</label></div>
+                <div class="radio-item"><input type="radio" name="marathon" value="Возможно, позже" id="mar2"><label for="mar2">⏳ Возможно, позже</label></div>
+                <div class="radio-item"><input type="radio" name="marathon" value="Нет, не интересуюсь" id="mar3"><label for="mar3">❌ Нет, не интересуюсь</label></div>
+            </div>
+        </div>
+
+        <!-- КОНТАКТЫ -->
+        <div class="row-2col">
+            <div class="field">
+                <label>📞 Телефон (WhatsApp) для связи</label>
+                <input type="tel" id="phone" placeholder="Номер">
+            </div>
+            <div class="field">
+                <label>👤 Кто порекомендовал анкету?</label>
+                <input type="text" id="invitedBy" placeholder="ФИО">
+            </div>
+        </div>
+
+        <!-- ЖЕЛАНИЕ ПРИОБРЕСТИ -->
+        <div class="field">
+            <label>🛒 Хотите попробовать или приобрести продукты Herbalife?</label>
+            <div class="radio-group" id="purchaseGroup">
+                <div class="radio-item"><input type="radio" name="purchase" value="Стартовый набор" id="pur1"><label for="pur1">✅ Стартовый набор (Алоэ, Чай, Коктейль)</label></div>
+                <div class="radio-item"><input type="radio" name="purchase" value="Выберу из списка" id="pur2"><label for="pur2">📦 Выберу продукты из списка ниже</label></div>
+                <div class="radio-item"><input type="radio" name="purchase" value="Пока изучаю" id="pur3"><label for="pur3">🔍 Пока изучаю информацию</label></div>
+                <div class="radio-item"><input type="radio" name="purchase" value="Только консультация" id="pur4"><label for="pur4">💬 Только консультация</label></div>
+            </div>
+        </div>
+
+        <!-- Блок выбора конкретных продуктов -->
+        <div class="field" id="productList" style="margin-top: 10px;">
+            <label>📋 Выберите продукты (можно несколько):</label>
+            <div class="checkbox-group">
+                <div class="checkbox-item"><input type="checkbox" class="product-checkbox" value="Базовый набор" id="prod1"><label for="prod1">Базовый набор</label></div>
+                <div class="checkbox-item"><input type="checkbox" class="product-checkbox" value="Вечерний коктейль" id="prod2"><label for="prod2">Вечерний коктейль</label></div>
+                <div class="checkbox-item"><input type="checkbox" class="product-checkbox" value="Овсяно-яблочный напиток" id="prod3"><label for="prod3">Овсяно-яблочный напиток</label></div>
+                <div class="checkbox-item"><input type="checkbox" class="product-checkbox" value="Женские витамины" id="prod4"><label for="prod4">Женские витамины</label></div>
+                <div class="checkbox-item"><input type="checkbox" class="product-checkbox" value="Мужские витамины" id="prod5"><label for="prod5">Мужские витамины</label></div>
+                <div class="checkbox-item"><input type="checkbox" class="product-checkbox" value="Кальций" id="prod6"><label for="prod6">Кальций</label></div>
+                <div class="checkbox-item"><input type="checkbox" class="product-checkbox" value="Белок" id="prod7"><label for="prod7">Белок</label></div>
+                <div class="checkbox-item"><input type="checkbox" class="product-checkbox" value="Коллаген" id="prod8"><label for="prod8">Коллаген</label></div>
+            </div>
+            <div class="field" style="margin-top: 15px;">
+                <label>📝 Другое (укажите)</label>
+                <input type="text" id="otherProduct" placeholder="Например, Термоджетикс, протеиновые батончики...">
+            </div>
+        </div>
+
+        <hr>
+
+        <!-- КНОПКА ДЛЯ ОТПРАВКИ -->
+        <button type="button" class="btn-wa" id="sendToWhatsApp">
+            <span>📲</span> Отправить анкету консультанту
+        </button>
+
+        <!-- КОНТАКТНАЯ ИНФОРМАЦИЯ -->
+        <div class="contact-info">
+            <p class="name">Татьяна • твой консультант</p>
+            <p>+7 9248994882 • <span class="social">@TanyaVenzel</span></p>
+            <p class="discount">регистрация бесплатно — скидка 25% навсегда</p>
+            <p>начни с любого варианта — я поддержу</p>
+        </div>
+    </form>
+</div>
+
+<script>
+    function getCheckedValues(checkboxGroupId) {
+        let values = [];
+        let checkboxes = document.querySelectorAll(`#${checkboxGroupId} input[type=checkbox]:checked`);
+        checkboxes.forEach(cb => values.push(cb.value));
+        return values.join(', ') || 'не указано';
+    }
+
+    function getRadioValue(name) {
+        let radio = document.querySelector(`input[name="${name}"]:checked`);
+        return radio ? radio.value : 'не выбрано';
+    }
+
+    document.getElementById('sendToWhatsApp').addEventListener('click', function() {
+        // Сбор основных полей
+        let name = document.getElementById('name').value.trim() || 'не указано';
+        let age = document.getElementById('age').value.trim() || 'не указано';
+        let height = document.getElementById('height').value.trim() || 'не указано';
+        let weight = document.getElementById('weight').value.trim() || 'не указано';
+        let job = document.getElementById('job').value.trim() || 'не указано';
+        let activity = getRadioValue('activity');
+        let schedule = document.getElementById('schedule').value;
+        let goals = getCheckedValues('goalsGroup');
+        let problems = getCheckedValues('problemsGroup');
+        let cravings = getCheckedValues('cravingsGroup');
+        let water = getRadioValue('water');
+        let allergies = document.getElementById('allergies').value.trim() || 'не указано';
+        let badHabits = document.getElementById('badHabits').value.trim() || 'не указано';
+        let digestion = document.getElementById('digestion').value.trim() || 'не указано';
+        let improvements = document.getElementById('improvements').value.trim() || 'не указано';
+        let tried = document.getElementById('triedProducts').value.trim() || 'не пробовал(а)';
+        let liked = document.getElementById('likedProducts').value.trim() || '—';
+        let experience = document.getElementById('experience').value;
+        let discount = document.getElementById('discount').value;
+        let income = getRadioValue('income');
+        // Новое поле
+        let marathon = getRadioValue('marathon');
+        let phone = document.getElementById('phone').value.trim() || 'не указан';
+        let invitedBy = document.getElementById('invitedBy').value.trim() || 'не указано';
+
+        // Обработка выбора продуктов
+        let purchase = getRadioValue('purchase');
+        let purchaseText = purchase;
+
+        if (purchase === 'Выберу из списка') {
+            let selectedProducts = [];
+            let productCheckboxes = document.querySelectorAll('.product-checkbox:checked');
+            productCheckboxes.forEach(cb => selectedProducts.push(cb.value));
+            let other = document.getElementById('otherProduct').value.trim();
+            if (selectedProducts.length > 0 || other) {
+                let productsStr = '';
+                if (selectedProducts.length > 0) {
+                    productsStr += selectedProducts.join(', ');
+                }
+                if (other) {
+                    if (productsStr) productsStr += '; ';
+                    productsStr += 'Другое: ' + other;
+                }
+                purchaseText = 'Выбрано: ' + productsStr;
+            } else {
+                purchaseText = 'Выберу из списка (ничего не выбрано)';
+            }
+        } else if (purchase === 'Стартовый набор') {
+            purchaseText = 'Стартовый набор (Алоэ, Чай, Коктейль)';
+        }
+
+        // Дата заполнения
+        let currentDate = new Date().toLocaleDateString('ru-RU');
+
+        // Формирование сообщения с эмодзи (добавлена строка про марафон)
+        let message = `📋 *Новая анкета* 📋\n\n`;
+        message += `📅 *Дата заполнения:* ${currentDate}\n`;
+        message += `👤 *Имя:* ${name}\n`;
+        message += `🎂 *Возраст:* ${age}\n`;
+        message += `📏 *Рост:* ${height} см\n`;
+        message += `⚖️ *Вес:* ${weight} кг\n`;
+        message += `💼 *Работа/занятие:* ${job}\n`;
+        message += `🏃 *Тип нагрузки:* ${activity}\n`;
+        message += `⏰ *График:* ${schedule}\n`;
+        message += `🎯 *Цели:* ${goals}\n`;
+        message += `⚠️ *Проблемы:* ${problems}\n`;
+        message += `🍰 *Тяга к:* ${cravings}\n`;
+        message += `💧 *Вода в день:* ${water}\n`;
+        message += `🤧 *Аллергии/здоровье:* ${allergies}\n`;
+        message += `🚬🍷 *Вредные привычки:* ${badHabits}\n`;
+        message += `🚽 *Проблемы ЖКТ:* ${digestion}\n`;
+        message += `✨ *Что хотите улучшить:* ${improvements}\n`;
+        message += `🧪 *Пробовал(а) продукты:* ${tried}\n`;
+        message += `❤️ *Что понравилось:* ${liked}\n`;
+        message += `📅 *Стаж Herbalife:* ${experience}\n`;
+        message += `💰 *Текущая скидка:* ${discount}\n`;
+        message += `💵 *Интерес к доходу:* ${income}\n`;
+        message += `🎽 *Марафон стройности:* ${marathon}\n`;  // новая строка
+        message += `📞 *Телефон:* ${phone}\n`;
+        message += `🤝 *Пригласил:* ${invitedBy}\n`;
+        message += `🛒 *Желание приобрести:* ${purchaseText}\n`;
+
+        // Кодируем для URL
+        let encodedMessage = encodeURIComponent(message);
+        let phoneNumber = '79248994882'; // только цифры
+        let waUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+
+        // Универсальный способ открытия (работает на всех устройствах)
+        window.open(waUrl, '_blank');
+
+        // Дополнительные способы для надёжности
+        setTimeout(() => {
+            window.location.href = waUrl;
+        }, 300);
+
+        let link = document.createElement('a');
+        link.href = waUrl;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    });
+</script>
+</body>
+</html>
